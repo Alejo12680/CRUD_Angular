@@ -1,3 +1,13 @@
 i {
     cursor: pointer;
 }
+
+.form-check-input:checked {
+    background-color: green;
+    border-color: #26d316;
+}
+
+.form-check-input {
+    width: 1.1rem;
+    height: 1.1rem;
+}

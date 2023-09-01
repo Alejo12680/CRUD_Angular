@@ -1,6 +1,6 @@
 export const environment = {
 
-    firebase: {
+    firebaseConfig: {
         apiKey: "AIzaSyC46jVAgifJeLMA9b867yfyzMjj2pJ5oMI",
         authDomain: "crud-tareas-fb995.firebaseapp.com",
         projectId: "crud-tareas-fb995",

@@ -1,36 +1,43 @@
 <div class="container mt-4">
     <div class="card">
-        <div class="card-body">
+        <div class="card-body ">
             <span class="h3">Lista de Tareas</span>
 
             <button class="btn btn-dark float-end" routerLink="/createTarea">Agregar</button>
-            <table class="table table-striped mt-5">
-                <thead>
-                  <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Check</th>
-                    <th scope="col">Tareas</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><i class="fa-solid fa-pen-to-square fa-lg"></i></td>
-                    <td><i class="fa-solid fa-trash-can fa-lg text-danger"></i></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+            <div class="table-responsive mt-5 p-2">
+              <table class="table table-warning table-striped table-sm align-middle">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Check</th>
+                      <th scope="col">Tareas</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>
+                        <input class="form-check-input ms-3" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                      </td>
+                      <td>Ottoasdasdasdasdasdasdasd</td>
+                      <td><i class="fa-solid fa-pen-to-square fa-lg ms-3"></i></td>
+                      <td><i class="fa-solid fa-trash-can fa-lg text-danger ms-3"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>
+                        <input class="form-check-input ms-3" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                      </td>
+                      <td>Ottoasdasdasdasdasdasdasd</td>
+                      <td><i class="fa-solid fa-pen-to-square fa-lg ms-3"></i></td>
+                      <td><i class="fa-solid fa-trash-can fa-lg text-danger ms-3"></i></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

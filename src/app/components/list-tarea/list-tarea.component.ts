@@ -1,5 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-list-tarea',
@@ -7,9 +6,6 @@ import { Firestore } from '@angular/fire/firestore';
   styleUrls: ['./list-tarea.component.scss']
 })
 export class ListTareaComponent {
-
-  // injeccion al modulo de firestone
-  firestore: Firestore = inject(Firestore);
 
   constructor () {
 
