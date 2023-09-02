@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { tareaInterfaz } from '../../service/interfaz_tarea';
 import { TareasService } from '../../service/tareas.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-create-tarea',
@@ -14,13 +17,17 @@ export class CreateTareaComponent {
 
   public submitted: boolean = false;
 
+  public loading: boolean = false;
+
   constructor (
     private formBuilder: FormBuilder,
     private tareasService: TareasService,
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
-    // Se inicia el fomulario
+    // Se inicia el fomulario con los valideitors
     this.formCreateTarea = this.formBuilder.group({
       tarea: ['', Validators.required],
     })
@@ -37,16 +44,14 @@ export class CreateTareaComponent {
         "fechaActualizacion": new Date(),
       }
 
-      // Servicio que retorna una promesa.
-      this.tareasService.agregarTarea(estructura).then(() => {
-        console.log('Tarea Registrada');
-        
-      }).catch(Error => {
-        console.error(Error);        
-      })  
+      /* console.log(estructura); */
 
-      console.log(estructura);
+      // funcion que tiene el servicio
+      this.creacionTarea(estructura);
+
       this.formCreateTarea.reset();
+      this.toastr.success('Tarea Registrada con Exito', 'Se agrego una tarea');
+      this.loading = true;
       
     } else {
       this.submitted = true;
@@ -54,6 +59,21 @@ export class CreateTareaComponent {
       console.log(this.formCreateTarea.status);
     }
 
+  }
+
+  creacionTarea (estructura: object) {
+    // Servicio que retorna una promesa.
+    this.tareasService.agregarTarea(estructura).then(() => {
+
+      /* console.log('Tarea Registrada'); */
+      /* this.router.navigate(['../list-tarea/list-tarea.component.html']) */
+      this.loading = false;
+      
+    }).catch(Error => {
+      /* console.error(Error); */
+      this.toastr.error('Error en la Peticion', Error.error); 
+      this.loading = false;       
+    }) 
   }
 
 }

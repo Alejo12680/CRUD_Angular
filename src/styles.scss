@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+//Impoorta el Toastr para los mensajes
+@import 'ngx-toastr/toastr';
+
+
 body {
     background-image: url(../src/assets/fondo_crud.jpg);
     background-position: center;

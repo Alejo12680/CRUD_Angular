@@ -4,8 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 // Modulos
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; // Importa de AngularFirestoreModule
+import { ReactiveFormsModule } from '@angular/forms';
+// Importante importar las animaciones o sino el toastr no va funcionar bien
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 // Componentes
@@ -28,7 +32,9 @@ import { environment } from 'src/environments/environment.development';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ReactiveFormsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
