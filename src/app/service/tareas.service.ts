@@ -21,7 +21,8 @@ export class TareasService {
 
   // Servicio de firebases es un observable GET
   obtenerTarea(): Observable<any> {
-    return this.firestore.collection('tareas').snapshotChanges();
+    // Para ordenar el resultados de datos que nos trae firebases vamos a colocar en la variable 'tareas' como se llama la base en firebases colocamos ('tarea', ref => ref.orderBy('fechaCreacion', 'desc'))
+    return this.firestore.collection('tareas', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
   }
 
 

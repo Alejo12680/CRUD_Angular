@@ -66,7 +66,7 @@ export class CreateTareaComponent {
     this.tareasService.agregarTarea(estructura).then(() => {
 
       /* console.log('Tarea Registrada'); */
-      /* this.router.navigate(['../list-tarea/list-tarea.component.html']) */
+      this.router.navigate(['../list-tarea/list-tarea.component.html'])
       this.loading = false;
       
     }).catch(Error => {
