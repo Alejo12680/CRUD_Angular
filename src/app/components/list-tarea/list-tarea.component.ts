@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TareasService } from '../../service/tareas.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-tarea',
@@ -12,6 +13,7 @@ export class ListTareaComponent {
 
   constructor (
     private tareasService: TareasService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +49,18 @@ export class ListTareaComponent {
       /* console.log(this.tarea); */
       
     })
+  }
+
+  elimnarTareas(id: string) {
+    this.tareasService.eliminarTarea(id).then(() => {
+      this.toastr.error('Tarea Eliminada con Exitosamente', 'Se elimino una tarea', {
+        positionClass: 'toast-bottom-right'
+      });
+
+    }).catch(Error => {
+      /* console.error(Error); */
+      this.toastr.error('Error en la Peticion', Error.error);        
+    }) 
   }
 
 }

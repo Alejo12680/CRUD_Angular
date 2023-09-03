@@ -2,10 +2,20 @@
     <div class="card">
         <div class="card-body ">
             <span class="h3">Lista de Tareas</span>
-
             <button class="btn btn-dark float-end" routerLink="/createTarea">Agregar</button>
+
+            <div class="row mt-4 align-items-center" *ngIf="tarea.length === 0">
+              <div class="col-5 text-center">
+                <!-- <h3>Prueba imagen</h3> -->
+                <img width="100" src="../../../assets/meme.jpg" alt="No hay Datos">
+              </div>   
+              <div class="col-7 text-start">
+                <h3>No Hay Datos que Mostrar</h3>
+              </div>             
+            </div>
+
             <div class="table-responsive mt-5 p-2">
-              <table class="table table-warning table-striped table-sm align-middle">
+              <table class="table table-warning table-striped table-sm align-middle" *ngIf="tarea.length > 0">
                   <thead class="table-dark">
                     <tr>
                       <th scope="col">No.</th>
@@ -23,7 +33,7 @@
                       </td>
                       <td> <b>{{dato.tarea | uppercase}}</b> </td>
                       <td><i class="fa-solid fa-pen-to-square fa-lg ms-3"></i></td>
-                      <td><i class="fa-solid fa-trash-can fa-lg text-danger ms-3"></i></td>
+                      <td><i class="fa-solid fa-trash-can fa-lg text-danger ms-3" (click)="elimnarTareas(dato.id)"></i></td>
                     </tr>
                   </tbody>
                 </table>
