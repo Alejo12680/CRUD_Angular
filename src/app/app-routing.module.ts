@@ -19,6 +19,12 @@ const routes: Routes = [
     component: CreateTareaComponent
   },
 
+  // Creamos otra ruta para reutilizar el componente como para editar, enviandole como parametro dinamico que es el id de la tarea.
+  {
+    path:'editarTarea/:id',
+    component: CreateTareaComponent
+  },
+
   // Este path siempre va a lo ultimo, es un volteo de ruta cuando el usuario escribe una URL que no corresponde a ningun componente.
   {
     path:'**',

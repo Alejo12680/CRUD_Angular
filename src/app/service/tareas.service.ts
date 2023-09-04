@@ -30,5 +30,15 @@ export class TareasService {
     return this.firestore.collection('tareas').doc(id).delete();
   }
 
+  // Servicio para Editar una tarea en Firebases que devuelve un Observable de tipo POST con los datos a actualizar
+  editarTarea( id: string): Observable<any> {
+    return this.firestore.collection('tareas').doc(id).snapshotChanges();
+  }
+
+  // Servicio para enviar la actualizacion de la tarea editable que esta en metodo POST que devuelve una Promesa
+  actualizarTarea(id: string, data: any): Promise<any>  {
+    return this.firestore.collection('tareas').doc(id).update(data);
+  }
+
 
 }
