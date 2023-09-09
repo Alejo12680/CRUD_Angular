@@ -40,5 +40,10 @@ export class TareasService {
     return this.firestore.collection('tareas').doc(id).update(data);
   }
 
+  // Servicio para enviar la actualizacion del estado de la tarea que esta en metodo POST que devuelve una Promesa
+  actualizarEstado(id: string, data: any): Promise<any>  {
+    return this.firestore.collection('tareas').doc(id).update(data);
+  }
+
 
 }

@@ -56,6 +56,7 @@ export class CreateTareaComponent {
           "tarea": this.formCreateTarea.value.tarea,
           "fechaCreacion": new Date(),
           "fechaActualizacion": new Date(),
+          "checked": false,
         }
   
         /* console.log(estructura); */
