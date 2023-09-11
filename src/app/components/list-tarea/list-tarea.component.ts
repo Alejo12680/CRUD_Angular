@@ -152,7 +152,7 @@ export class ListTareaComponent implements OnDestroy {
   // funcion para exportar a EXCEL
   exportarAExcel(): void {
 
-    // Mapeamos el array para obtener un nuevo objeto mas limpio y eso es lo que vamos a enviar al Excel
+    // Mapeamos el array para obtener un nuevo objeto mas limpio y eso es lo que vamos a enviar al Excel, Ejemplo para mapear objetos es: variableNew = this.array.map(data => ({name: data.name}))
     let tareas = this.tarea.map(res => ({
         id: res.id,
         tarea: res.tarea,
