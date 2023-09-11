@@ -21,6 +21,8 @@ export class CreateTareaComponent {
 
   public titulo: string = 'Crear Tarea';
 
+  public nomBoton: string = 'Agregar';
+
   // Esta variable es para poder editar la tarea con el id
   public ids!: string | null;
 
@@ -101,7 +103,10 @@ export class CreateTareaComponent {
 
       this.tareasService.editarTarea(this.ids).subscribe((res: any) => {
         this.loading = false;
+
+        // Nombres que cambian cuando se ingresa al formato de editar.
         this.titulo = 'Editar Tarea';
+        this.nomBoton = 'Editar';
         // En este console.log podemos acceder al dato en especifico que necesitamos, se puede colocar mas campos si lo requerimos con un setValue en formulario control.
         /* console.log(res.payload.data()['tarea']); */
 

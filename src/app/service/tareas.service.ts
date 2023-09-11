@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { tareaInterfaz } from './interfaz_tarea';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 
@@ -13,6 +13,17 @@ export class TareasService {
   constructor(
     private firestore:AngularFirestore
   ) { }
+
+  // Variables en las que se suscribe y se hace llamado del observable.
+  private filtroTextoSubject = new BehaviorSubject<string>('');
+  filtroTexto$ = this.filtroTextoSubject.asObservable();
+
+  // Servicio que transmite el observable, para el buscador del componente, este es un observable que suscribe el componente que necesite la informacion y haciendolo reactivo.
+  setFiltroTexto(texto: string) {
+    this.filtroTextoSubject.next(texto);
+  }
+  // ******************************************************************
+  
 
   // Servicio para enviar los datos de firebases es una promesa POST
   agregarTarea(tarea: tareaInterfaz): Promise<any> {
@@ -44,6 +55,5 @@ export class TareasService {
   actualizarEstado(id: string, data: any): Promise<any>  {
     return this.firestore.collection('tareas').doc(id).update(data);
   }
-
 
 }

@@ -1,9 +1,9 @@
 <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand">Lista de Tareas - Firebase</a>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Tareas" aria-label="Search">
-        <button class="btn btn-outline-warning" type="submit">Buscar</button>
+      <form class="d-flex" role="search" (ngSubmit)="filtrarTareas()">
+        <input class="form-control me-2" type="text" placeholder="Nombre de la tarea" name="filtroTexto" [(ngModel)]="filtroTexto" (click)="resetearFormulario()">
+        <button class="btn btn-outline-warning me-3" type="submit">Buscar</button>
       </form>
     </div>
   </nav>

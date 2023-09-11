@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TareasService } from '../../service/tareas.service';
 import { ToastrService } from 'ngx-toastr';
 import { tareaInterfaz } from '../../service/interfaz_tarea';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,12 +10,15 @@ import { tareaInterfaz } from '../../service/interfaz_tarea';
   templateUrl: './list-tarea.component.html',
   styleUrls: ['./list-tarea.component.scss']
 })
-export class ListTareaComponent {
+export class ListTareaComponent implements OnDestroy {
 
   public tarea: any [] = [];
+  public tareasOriginales: any[] = [];
 
-  public seleccion: any [] = [];
-  public estado!: boolean;
+  public filtroTexto: string = '';
+
+  // Variable donde se subscribe inicializada con new Subscription()
+  private subscription: Subscription = new Subscription();
 
 
   constructor (
@@ -25,13 +29,29 @@ export class ListTareaComponent {
   ngOnInit(): void {
     // Funcion que obtiene las tareas por el metodo GET mediante un subscribe
     this.getTareas ();
+
+    // funcion del observable que se suscribe
+    this.subscription = this.tareasService.filtroTexto$.subscribe(texto => {
+      this.filtroTexto = texto;
+      this.filtrarTareas();
+    });
     
+  }
+
+  // Implementa el método 'ngOnDestroy' para desuscribirte cuando el componente se destruye
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   getTareas () {
     this.tareasService.obtenerTarea().subscribe((res: any) => {
       // Imprime toda la estructura de los datos que nos envia firebase
       /* console.log(res); */
+
+      // Variable para el Filtro de busqueda
+      this.tareasOriginales = [];
 
       this.tarea = [];
       // La informacion llega con muchos datos por default por esa razon se hace un forech o se puede map
@@ -49,7 +69,14 @@ export class ListTareaComponent {
         this.tarea.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
-        })        
+        }) 
+        
+        // Almacenamos de igual forma que las this.tarea original para que aparezcan los items de nuevo en el buscador
+        this.tareasOriginales.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+
       });
       
       // Fuera del bucle for imprimimos el resultado
@@ -80,8 +107,7 @@ export class ListTareaComponent {
 
     // Se puede filtrar el array para obtener todo resultado que esta en true junto con todos los datos para procesarlo con otras funciones que desconosco en este momento, puede guardarce en el localStore pero no se logro por tal motivo se creo un servicio parte.
     /* this.seleccion = this.tarea.filter(add => add.checked === true);
-    console.log(this.seleccion); */
-    
+    console.log(this.seleccion); */   
 
     // Utilizo un servicio para enviarle el estado a la base de datos en una actualizacion por aparte, para cuando obtengo el getTareas me traiga el estado en el que se deja actualizado.
     let estructura: tareaInterfaz = {
@@ -94,6 +120,34 @@ export class ListTareaComponent {
       console.error(Error);
       this.toastr.error('Error en la Peticion', Error.error);      
     }) 
+    
+  }
+
+  // Filtro de busqueda
+  filtrarTareas() {
+    // Convertir el filtro de texto a minúsculas para que la búsqueda sea insensible a mayúsculas/minúsculas
+    const filtroTextoLowerCase = this.filtroTexto.toLowerCase();
+
+    // Si no hay texto de filtro, mostrar todas las tareas
+    if (!this.filtroTexto || this.filtroTexto.trim() === '') {
+      // Puedes cargar todas las tareas nuevamente aquí o mantener la lista original
+      this.tarea = [...this.tareasOriginales];
+      return;
+
+    } else {
+        // Filtrar las tareas basadas en el texto de filtro
+        this.tarea = this.tarea.filter((dato: any) => {
+        // Aquí, debes ajustar el campo en el que deseas realizar la búsqueda.
+        // En este ejemplo, se busca en el campo 'tarea'.
+        const tareaTexto = dato.tarea.toLowerCase(); // Asegúrate de que el campo coincida con tu estructura de datos.
+        
+        // Utiliza 'includes' para verificar si el texto de la tarea contiene el filtro
+        return tareaTexto.includes(filtroTextoLowerCase);
+      });
+    }
+  
+    
+  
     
   }
 
