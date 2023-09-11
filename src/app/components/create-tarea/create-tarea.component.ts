@@ -43,6 +43,7 @@ export class CreateTareaComponent {
     // Se inicia el fomulario con los valideitors
     this.formCreateTarea = this.formBuilder.group({
       tarea: ['', Validators.required],
+      descripcion: ['', Validators.required],
     })
 
     this.editarTarea ();
@@ -56,6 +57,7 @@ export class CreateTareaComponent {
 
         let estructura: tareaInterfaz = {
           "tarea": this.formCreateTarea.value.tarea,
+          "descripcion": this.formCreateTarea.value.descripcion,
           "fechaCreacion": new Date(),
           "fechaActualizacion": new Date(),
           "checked": false,
@@ -112,6 +114,7 @@ export class CreateTareaComponent {
 
         this.formCreateTarea.setValue({
           tarea: res.payload.data()['tarea'],
+          descripcion: res.payload.data()['descripcion'],
         })
         
       })
@@ -122,6 +125,7 @@ export class CreateTareaComponent {
 
     let estructura: tareaInterfaz = {
       "tarea": this.formCreateTarea.value.tarea,
+      "descripcion": this.formCreateTarea.value.descripcion,
       "fechaActualizacion": new Date(),
     }
 

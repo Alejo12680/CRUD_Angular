@@ -20,7 +20,9 @@
                             </div>
                         </div>
                         <input type="text" class="form-control form-control-lg" placeholder="telefono"> -->
-                        <input type="text" class="form-control form-control-lg" placeholder="Agregar Tarea" formControlName="tarea">
+                        <input type="text" class="form-control form-control-lg mb-3" placeholder="Titulo de la Tarea" formControlName="tarea">
+
+                        <input type="text" class="form-control form-control-lg" placeholder="Descripcion de la Tarea" formControlName="descripcion">
 
                         <!-- Mensaje de Validación de campos -->
                         <h5 *ngIf="formCreateTarea.invalid && submitted === true" class="mt-2"><span class="badge text-bg-danger">Todos los campos son Obligatorios</span></h5>

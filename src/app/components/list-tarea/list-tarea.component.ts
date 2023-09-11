@@ -80,7 +80,7 @@ export class ListTareaComponent implements OnDestroy {
       });
       
       // Fuera del bucle for imprimimos el resultado
-      /* console.log(this.tarea); */
+      console.log(this.tarea);
 
       // Para agregar el campo checked de forma manual sin un servicio, mapeamos todo nuestro array que seria lo mismo que un foreach y se lo agregamos con en el estado en false, ya que con este estado podemos interpolar en html con un ngModal para que indica si sufre algun cambio de estado cada vez que lo seleccionamos, [(ngModel)]="dato.checked".
       /* this.tarea.map(res => {
