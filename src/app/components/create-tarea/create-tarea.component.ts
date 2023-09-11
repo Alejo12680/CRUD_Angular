@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-tarea.component.html',
   styleUrls: ['./create-tarea.component.scss']
 })
-export class CreateTareaComponent {
+export class CreateTareaComponent implements OnInit {
 
   public formCreateTarea!: FormGroup;
 
@@ -74,7 +74,8 @@ export class CreateTareaComponent {
         
       } else {
         this.submitted = true;
-        this.formCreateTarea.reset();
+        /* this.formCreateTarea.reset(); */
+        this.formCreateTarea.markAllAsTouched();
         console.log(this.formCreateTarea.status);
       }
 

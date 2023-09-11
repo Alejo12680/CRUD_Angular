@@ -2,6 +2,7 @@
     <div class="card">
         <div class="card-body ">
             <span class="h3">Lista de Tareas</span>
+            <button (click)="exportarAExcel()" class="btn btn-success float-end ms-3">Excel</button>
             <button class="btn btn-dark float-end" routerLink="/createTarea">Agregar</button>
 
             <div class="row mt-4 align-items-center" *ngIf="tarea.length === 0">

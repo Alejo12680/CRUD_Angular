@@ -3,6 +3,7 @@ import { TareasService } from '../../service/tareas.service';
 import { ToastrService } from 'ngx-toastr';
 import { tareaInterfaz } from '../../service/interfaz_tarea';
 import { Subscription } from 'rxjs';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -80,7 +81,7 @@ export class ListTareaComponent implements OnDestroy {
       });
       
       // Fuera del bucle for imprimimos el resultado
-      console.log(this.tarea);
+      /* console.log(this.tarea); */
 
       // Para agregar el campo checked de forma manual sin un servicio, mapeamos todo nuestro array que seria lo mismo que un foreach y se lo agregamos con en el estado en false, ya que con este estado podemos interpolar en html con un ngModal para que indica si sufre algun cambio de estado cada vez que lo seleccionamos, [(ngModel)]="dato.checked".
       /* this.tarea.map(res => {
@@ -145,10 +146,29 @@ export class ListTareaComponent implements OnDestroy {
         return tareaTexto.includes(filtroTextoLowerCase);
       });
     }
-  
     
-  
+  }
+
+  // funcion para exportar a EXCEL
+  exportarAExcel(): void {
+
+    // Mapeamos el array para obtener un nuevo objeto mas limpio y eso es lo que vamos a enviar al Excel
+    let tareas = this.tarea.map(res => ({
+        id: res.id,
+        tarea: res.tarea,
+        descripcion: res.descripcion,
+        estado: res.checked,
+      }));
+
+    /* console.log(tareas); */
     
+
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(tareas);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Hoja1');
+
+    // Generar el archivo Excel y descargarlo
+    XLSX.writeFile(wb, 'tabla_exportada.xlsx');
   }
 
 }
